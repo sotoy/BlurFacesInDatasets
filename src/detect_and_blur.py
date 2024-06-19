@@ -2,6 +2,7 @@ import os
 import cv2
 import numpy as np
 from deepface import DeepFace
+from tqdm import tqdm
 
 def blur_faces(image_path, output_path):
     image = cv2.imread(image_path)
@@ -20,13 +21,16 @@ def blur_faces(image_path, output_path):
     cv2.imwrite(output_path, image)
 
 def process_directory(directory):
+    image_paths = []
     for root, _, files in os.walk(directory):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
-                image_path = os.path.join(root, file)
-                output_path = image_path
-                #output_path = os.path.join(root, 'blurred_' + file)
-                blur_faces(image_path, output_path)
+                image_paths.append(os.path.join(root, file))
+                
+    for image_path in tqdm(image_paths,  desc='Processing images'):         
+        #output_path = image_path
+        output_path = os.path.join(os.path.dirname(image_path), 'blurred_' + os.path.basename(image_path))
+        blur_faces(image_path, output_path)
 
 if __name__ == '__main__':
     import sys
@@ -36,4 +40,3 @@ if __name__ == '__main__':
 
     directory = sys.argv[1]
     process_directory(directory)
-
