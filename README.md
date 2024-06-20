@@ -1,6 +1,8 @@
 # Blur Faces in Datasets
 An easy to install and use tool based on [deepface](https://github.com/serengil/deepface) and [retinaface](https://github.com/serengil/retinaface) to anonymize people in your dataset images.
+<kbd>
 ![Example of applying the blurring pipeline in a collection of Times Person of the Year magazines.](/example_imgs/BlurFaces.png)
+</kbd>
 ## Installation:
 Ensure that docker is installed in your system. If not, follow the [official webpage](https://docs.docker.com/engine/install/)
 
@@ -11,15 +13,15 @@ The code operates on all files contained in a directory, **including those in su
 
 ## Usage
 ### Step 1: Build the Docker Image:
-Navigate to the directory containing the Dockerfile and build the docker:
+Navigate to the repo folder and build the docker:
 ```
-cd src
-docker build -t face-blur .
+cd BlurFacesInDatasets
+docker build -t face-blur ./src
 ```
 ### Step 2: Run the Docker Container
 Ensure you have a directory with images you want to process. Then, run the container, mounting the directory into the container.
 ```
-docker run -v /path/to/your/dataset/root:/app/images face-blur python detect_and_blur.py /app/images
+docker run -v /path/to/your/dataset/root:/app/images face-blur /app/images
 ```
 This command mounts your local images directory to the /app/images directory inside the Docker container, allowing the script to access and process them.
 
