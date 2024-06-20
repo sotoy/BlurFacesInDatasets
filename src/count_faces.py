@@ -18,13 +18,16 @@ def detect_faces(image_path):
 def traverse_directory(directory, when):
     image_count = 0
     total_faces = 0
+    image_paths = []
     for root, _, files in os.walk(directory):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
-                image_path = os.path.join(root, file)
-                image_count += 1
-                num_faces = detect_faces(image_path)
-                total_faces += num_faces
+                image_paths.append(os.path.join(root, file))
+                
+    for image_path in tqdm(image_paths, desc='Counting faces'):         
+        image_count += 1
+        num_faces = detect_faces(image_path)
+        total_faces += num_faces
                 
     with open('/app/images/faces_'+when+'.txt', 'w') as f:
         s = "Number of images in Dataset: "+str(image_count)+'.\n'
