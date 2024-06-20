@@ -18,6 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the app's source code into the container
 COPY . .
 
-# Run the application
-CMD ["python", "detect_and_blur.py"]
+# Make run_pipeline.sh executable
+RUN chmod +x ./run_pipeline.sh
 
+# Run the application
+ENTRYPOINT ["./run_pipeline.sh"]
