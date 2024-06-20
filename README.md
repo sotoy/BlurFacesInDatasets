@@ -4,6 +4,11 @@ An easy to install and use tool based on [deepface](https://github.com/serengil/
 ## Installation:
 Ensure that docker is installed in your system. If not, follow the [official webpage](https://docs.docker.com/engine/install/)
 
+## Data Preparation
+The code operates on all files contained in a directory, **including those in subfolders**. Therefore, the existing folder structure does not have to be altered.
+[!CAUTION]
+The blurring pipeline modifies images **inplace**. Please make sure to not apply blurring on the original data. Instead operate on a copy of the dataset for security reasons.
+
 ## Usage
 ### Step 1: Build the Docker Image:
 Navigate to the directory containing the Dockerfile and build the docker:
