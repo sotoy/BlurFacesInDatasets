@@ -26,8 +26,9 @@ docker build -t face-blur ./src
 ### Step 2: Run the Docker Container
 Ensure you have a directory with images you want to process. Then, run the container, mounting the directory into the container.
 ```
-docker run -v /path/to/your/dataset/root:/app/images face-blur /app/images
+docker run --rm -v /path/to/your/dataset/root:/app/images face-blur /app/images
 ```
+Replace /path/to/your/dataset/root with your real dataset root folder path.
 In this command your local images directory is mounted to the /app/images directory inside the Docker container, allowing the script to access and process them.
 You can use the [DEMO](DEMO/) folder to test the pipeline.
 
