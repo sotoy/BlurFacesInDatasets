@@ -10,18 +10,21 @@ def blur_faces(image_path, output_path):
         return
 
     # Detect faces using RetinaFace
-    detections = DeepFace.extract_faces(image, detector_backend='retinaface', enforce_detection=False, align=False)
+    detections = DeepFace.extract_faces(image, detector_backend='yolov8', enforce_detection=False, align=False)
     for detection in detections:
-        roi = detection['facial_area']
-        x, y, w, h = roi['x'], roi['y'], roi['w'], roi['h']
-        face = image[y:y+h, x:x+w]
-        face = cv2.GaussianBlur(face, (21, 21), 20)
-        image[y:y+h, x:x+w] = face
+        if detection['confidence'] > 0:
+            roi = detection['facial_area']
+            x, y, w, h = roi['x'], roi['y'], roi['w'], roi['h']
+            face = image[y:y+h, x:x+w]
+            face = cv2.GaussianBlur(face, (65, 65), 20)
+            image[y:y+h, x:x+w] = face
 
     cv2.imwrite(output_path, image)
 
 def process_directory(directory):
     image_paths = []
+    created = False
+    
     for root, _, files in os.walk(directory):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -29,14 +32,15 @@ def process_directory(directory):
                 
     for image_path in tqdm(image_paths,  desc='Processing images'):         
         #output_path = image_path
-        output_path = os.path.join(os.path.dirname(image_path), 'blurred_' + os.path.basename(image_path))
+        if not created:
+            created = True
+        output_path = os.path.join(os.path.dirname(image_path), os.path.basename(image_path))
         blur_faces(image_path, output_path)
 
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) != 2:
-        print("Usage: python detect_and_blur.py <directory>")
-        sys.exit(1)
-
-    directory = sys.argv[1]
+    
+    directory = sys.argv[-1]
+    print("BLURRING FACES...")
     process_directory(directory)
+    print("FACES BLURRED!")
