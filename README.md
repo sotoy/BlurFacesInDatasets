@@ -1,5 +1,5 @@
 # Blur Faces in Datasets
-An easy to install and use tool based on [deepface](https://github.com/serengil/deepface) to anonymize people in your dataset images, as well as evaluating the anonymization.
+An easy to install and use tool based on [deepface](https://github.com/serengil/deepface) to anonymize people in your dataset images, as well as to evaluate the anonymization procedure.
 <kbd>
 ![Example of applying the blurring pipeline in a collection of Times Person of the Year magazines.](/example_imgs/BlurFaces.png)
 </kbd>
