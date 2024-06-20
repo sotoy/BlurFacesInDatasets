@@ -1,5 +1,6 @@
 opencv-python-headless
 numpy
+ultralytics
 deepface
 tf-keras
 tqdm
