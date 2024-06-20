@@ -33,7 +33,7 @@ In this command your local images directory is mounted to the /app/images direct
 You can use the [DEMO](DEMO/) folder to test the pipeline.
 
 >[!Note]
->Please bear in mind that in the current version the CNN runs on cpu. For gpu deployment, please make the necessary adjustments in the dockerfile, as well as in the requirements.txt file. Otherwise, please wait for a release with proper gpu intergration.
+>Please bear in mind that in the current version the CNN runs on cpu. For gpu deployment, please make the necessary adjustments in the dockerfile, as well as in the requirements.txt file. 
 
 ### Result
 In the end, all images containing faces in the dataset will be modified, and two .txt files (faces_before.txt and faces_after.txt) will be created inside the dataset root folder containing the anonymity metrics of the dataset. Please be reminded to apply the pipeline in a copy of the original dataset root (as explained [here](#data-preparation))
